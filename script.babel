@@ -1,0 +1,86 @@
+
+
+const quotes = [
+["There is nothing permanent except change", "Heraclitus", "lucas-benjamin-565253-unsplash.jpg"],
+["The supreme art of war is to subdue the enemy without fighting", "Sun Tzu", "aaron-burden-88770-unsplash.jpg"],
+ ["Independence is happiness", "Susan B. Anthony", "samuel-zeller-4135-unsplash.jpg"],
+ ["Being entirely honest with oneself is a good exercise", "Sigmund Freud", "joshua-earle-1050463-unsplash.jpg"],
+["The journey of a thousand miles begins with one step", "Lao Tzu", "camila-damasio-2720-unsplash.jpg"],
+["There is only one corner of the universe you can be certain of improving, and that’s your own self", "Aldous Huxley", "lorenzo-colombo-698580-unsplash.jpg"],
+["There are two ways of spreading light: to be the candle or the mirror that reflects it", "Edith Wharton", "bekah-russom-231866-unsplash.jpg"],
+ ["Not all those who wander are lost", "John R. R. Tolkien", "cristina-gottardi-106636-unsplash.jpg"],
+["I have not failed. I have just found 10000 ways that won’t work", "Thomas A. Edison", "marko-blazevic-441379-unsplash.jpg"],
+["Tell me and I forget. Teach me and I remember. Involve me and I learn", "Benjamin Franklin", "jonathan-francisca-606247-unsplash.jpg"],
+ ["If opportunity doesn’t knock, build a door", "Milton Berle", "christopher-harris-55545-unsplash.jpg"],
+["Always remember that you are absolutely unique. Just like everyone else", "Margaret Mead", "benedikt-geyer-1129972-unsplash.jpg"],
+ ["Problems are not stop signs, they are guidelines", "Robert H. Schuller", "guilherme-stecanella-370401-unsplash.jpg"],
+ ["What we achieve inwardly will change outer reality", "Plutarch", "mattia-faloretti-709077-unsplash.jpg"],
+ ["Life is not a problem to be solved, but a reality to be experienced", "Soren Kierkegaard", "mi-pham-223464-unsplash.jpg"],
+ ["Life isn’t about finding yourself. Life is about creating yourself", "George Bernard Shaw", "h-heyerlein-199082-unsplash.jpg"],
+["The pessimist complains about the wind; the optimist expects it to change; the realist adjusts the sails", "William Arthur Ward", "johannes-plenio-782754-unsplash.jpg"],
+ ["Vanity working on a weak head, produces every sort of mischief", "Jane Austen", "nina-z-1209025-unsplash.jpg"],
+ ["We are most alive when we are in love", "John Updike", "everton-vila-140207-unsplash.jpg"],
+ ["The world is full of magical things patiently waiting for our wits to grow sharper", "Bertrand Russell", "faye-cornish-553422-unsplash.jpg"]];
+
+class RandomQuotes extends React.Component {
+  constructor (props){
+    super(props);
+    this.state = {
+      randomIndex: "0",
+      toggle: false,
+    };
+    this.handleClick = this.handleClick.bind(this);
+    this.toggle=this.toggle.bind(this);
+    this.click=this.click.bind(this);
+  }
+  
+  handleClick(){
+      this.setState({
+      randomIndex: Math.floor(Math.random()*20)
+      });
+    }
+  
+  toggle(){
+    this.setState({
+      toggle: !this.state.toggle,
+      });
+  }
+  
+  click() {
+      this.handleClick();
+      this.toggle();
+   }
+  
+  render (){
+const quote = quotes[this.state.randomIndex];
+document.getElementById("boody").style.backgroundImage = "url('https://s3-ap-southeast-2.amazonaws.com/elena.kosobrodova.codepen/random-pictures/"
+ + quote[2] + "')";
+    
+ if (this.state.toggle) {   
+   return ( <div>
+  <div className="fade-in">
+     <div className="box">
+    <h2>{quote[0]}</h2> 
+      <h3 className="text-right">{quote[1]}</h3>
+    <button className="butn" onClick={this.click}>New Quote</button> <br/> 
+       </div>
+       </div> </div>
+  );
+ }
+    
+  return ( 
+  <div className="fade-in">
+      <div className="box">
+    <h2>{quote[0]}</h2> 
+      <h3 className="text-right">{quote[1]}</h3>
+    <button className ="butn" onClick={this.click}>New Quote</button> <br/> 
+    </div>  
+    </div>    
+  );
+}
+};
+
+ReactDOM.render(
+<RandomQuotes/>,
+  document.getElementById("quote-box")
+);
